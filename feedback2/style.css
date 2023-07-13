@@ -1,0 +1,132 @@
+html {
+    font: 300 100%/1.5 Ubuntu, sans-serif;
+    color: #fff;
+    background-color: #222;
+    overflow-x: hidden;
+  }
+  #navbar {
+    background-color: #0f0d15;
+    color: #fff;
+    overflow: hidden;
+    position: fixed;
+    top: 10px;
+    left: 20px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(245, 245, 245, 0.385);
+    z-index: 1;
+  }
+
+  #navbar img {
+    width: 180px;
+    height: 70px;
+    margin-right: 10px;
+  }
+  .container {
+    position: relative;
+    z-index: 1; /* Ensure the container is positioned above the background animation */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  h2 {
+    margin-top: -10px;
+    margin-bottom: 20px;
+    color: #6a90b4;
+    font-size: 2.5em;
+    font-weight: 300;
+  }
+  
+  #contact-form {
+    width: 450px;
+    padding: 30px;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.703);
+    border: 1px solid white;
+  }
+  
+  #contact,
+  label,
+  input[name="submit"] {
+    position: relative;
+  }
+  
+  label > span,
+  input,
+  textarea,
+  button {
+    box-sizing: border-box;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 15px;
+  }
+  
+  label > span {
+    display: none;
+  }
+  
+  input,
+  textarea,
+  button {
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 5px;
+    font: 500 100%/1.2 Ubuntu, sans-serif;
+    background-color: #555;
+    color: #fff;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    border: 1px solid #666;
+    outline: none;
+  }
+  
+  input.invalid,
+  textarea.invalid {
+    border-color: #d5144d;
+  }
+  
+  textarea {
+    height: 6em;
+  }
+  
+  input[type="submit"],
+  button {
+    background: #928bdc;
+    color: #333;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    border: 1px solid white;
+    border-radius: 5px;
+  }
+  
+  input[type="submit"]:hover,
+  button:hover {
+    background: #0d00ff;
+    color: #fff;
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .container {
+    animation: fadeIn 0.5s ease;
+  }
+  

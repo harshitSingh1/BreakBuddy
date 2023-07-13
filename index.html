@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>BreakBuddy</title>
+  <link href="style.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="./images/favicon.png">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+</head>
+<body>
+  <div id="navbar">
+    <a href="index.html">
+    <img src="images/breakbuddy2.png" alt="Website Logo">
+  </a>
+  <div class="weath" onclick="window.open('./weather/weather.html')">
+    <div class="weather-box">
+      <div class="weather-icon"></div>
+      <div class="weather-details">
+        <div class="location">
+          Greater Noida
+          <span class="dropdown-icon">&#9660;</span>
+        </div>
+        <div class="temperature">30°C Cloudy</div>
+      </div>
+    </div>
+  </div>
+    <div class="search-container">
+      <form id="search-form">
+        <input type="text" placeholder="Search...">
+        <button type="submit">Search</button>
+      </form> 
+    </div>
+    <!-- Or use title="notification/profile" in buttons as tooltip to reduce css-->
+    <div class="tooltip">
+    <button class="like-button" onclick="window.location.href = './Notification/notification.html'"><lord-icon
+      src="https://cdn.lordicon.com/psnhyobz.json"
+      trigger="hover"
+      colors="primary:#ffffff"
+      state="hover"
+      style="width:25px;height:25px"
+    ></lord-icon></button>
+    <span class="tooltiptext">Notifications</span>
+  </div>
+    <div class="tooltip">
+    <button class="profile-button" onclick="window.location.href = './login/login.html'"><lord-icon
+      src="https://cdn.lordicon.com/bhfjfgqz.json"
+      trigger="hover"
+      colors="primary:#ffffff"
+      state="hover"
+      style="width:25px;height:25px">
+  </lord-icon></button>
+  <span class="tooltiptext">Profile</span>
+</div>
+  </div>
+  
+  <div class="sidebar">
+    <div class="sb">
+      <span>&nbsp;Close SideBar</span>
+    </div>
+    <button class="collapse-button">&#10094;</button>
+    <div class="sidebar-content">
+      <div class="shortcut-button" onclick="window.open('https://chat.openai.com/')">
+        <img width="20px" height="20px" src="./images/gpt.png" alt="GPT Search">
+        <span>GPT Search</span>
+      </div>
+      <div class="shortcut-button" onclick="setReminder()">
+        <img width="20px" height="20px" src="./images/bell.png" alt="Set Reminder">
+        <span>Set Reminder</span>
+      </div>
+      <div class="shortcut-button" onclick="window.location.href='./ToDo/ToDo.html'">
+        <img width="20px" height="20px" src="./images/to-do-list.png" alt="ToDo">
+        <span>ToDo List</span>
+      </div>
+      <div class="shortcut-button" onclick="window.open('https://www.timeanddate.com/calendar/')">
+        <img width="20px" height="20px" src="./images/calender.png" alt="Calender">
+        <span>Calender</span>
+      </div>
+      <div class="shortcut-button" onclick="window.location.href='../ToDo2/ToDo.html'">
+        <img width="20px" height="20px" src="./images/bookmark.png" alt="Bookmark">
+        <span>Bookmarks</span>
+      </div>
+      <div class="shortcut-button" onclick="window.location.href='./feedback/feedback.html'">
+        <img width="20px" height="20px" src="./images/thumb-up.png" alt="Feedback">
+        <span>Feedback</span>
+      </div>
+      <div class="shortcut-button">
+        <img width="20px" height="20px" src="./images/settings.png" alt="Settings">
+        <span>Settings</span>
+      </div>
+      <div class="shortcut-button">
+        <img width="20px" height="20px" src="./images/about_us.png" alt="About US">
+        <span>About us</span>
+      </div>
+      <div class="shortcut-button" onclick="shareLink()">
+        <img width="20px" height="20px" src="./images/share.png" alt="Invite">
+        <span>Invite People</span>
+      </div>
+      <div class="shortcut-button" id="socialMediaButton" onclick="toggleIcons()">
+        <img width="20px" height="20px" src="./images/social-media.png" alt="Social Media">
+        <span>Social Media</span>
+      </div>
+      <div id="socialMediaIcons" class="hidden">
+        <ul class="wrapper">
+          <li class="icon instagram">
+            <span class="tooltip">Instagram</span>
+            <span><i class="fab fa-instagram"></i></span>
+          </li>
+          <li class="icon LinkedIn">
+            <span class="tooltip">LinkedIn</span>
+            <span><i class="fab fa-linkedin"></i></span>
+          </li>
+          <li class="icon github">
+            <span class="tooltip">Github</span>
+            <span><i class="fab fa-github"></i></span>
+          </li>
+          <li class="icon twitter">
+            <span class="tooltip">Twitter</span>
+            <span><i class="fab fa-twitter"></i></span>
+          </li>
+        </ul>
+    </div>
+    <div class="rank-progress">
+      <h2>No Rank</h2>
+      <p>Progress:0</p>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="addsitebox">
+    <div class="tooltip">
+      <button class="btn-1" id="addShortcutBtn">Add a site</button>
+      <span class="tooltiptext">Add shortcut of any site</span>
+    </div>
+  <div id="shortcutContainer"></div>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">×</span>
+      <input type="text" id="nameInput" placeholder="Name" />
+      <input type="text" id="urlInput" placeholder="URL" />
+      <button id="saveShortcutBtn">Save</button>
+    </div>
+  </div>
+  </div>
+  
+  <div class="container">
+    <div class="container1">
+      <button onclick="addBox()" type="button" class="btn">
+        <span class="tooltip1">Add your working files here for testing</span>
+          <strong>Click HERE to send your idea/game</strong>
+          <div id="container-stars">
+            <div id="stars"></div>
+          </div>
+          <div id="glow">
+            <div class="circle"></div>
+            <div class="circle"></div>
+          </div>
+        </button>
+        <div class="tooltip1">Add your working files here for testing</div>         
+    </div>
+		<div class="box">
+			<a href="https://medium.com/?tag=technical-blog" target="_blank">
+        <h2>Technical blogs</h2>
+        <p>It contains informative and insightful articles on various technical topics.</p>
+				<img src="./images/tasks/blogs.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+		<div class="box">
+			<a href="https://www.weareteachers.com/weird-fun-facts/" target="_blank">
+        <h2>Facts</h2>
+        <p>Interesting and intriguing facts presented in a concise manner</p>
+				<img src="images/tasks/facts.jpeg" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+		<div class="box">
+			<a href="https://www.rd.com/list/funniest-jokes-of-all-time/" target="_blank">
+        <h2>Funny</h2>
+        <p>A collection of humorous content to bring a smile to your visitors' faces</p>
+				<img src="images/tasks/funny.jpeg" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+		<div class="box">
+			<a href="https://www.proprofs.com/quiz-school/story.php?title=ittech-knowledge-quiz" target="_blank">
+        <h2>Quizzes</h2>
+        <p>Engaging quizzes to test your knowledge and challenge yourself</p>
+				<img src="images/tasks/quiz.jpeg" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+		<div class="box">
+			<a href="./games/Tic-Tac-Toe/ttt.html" target="_blank">
+        <h2>Tic-Tac-Toe</h2>
+        <p>Classic game of Tic-Tac-Toe that users can play against the computer</p>
+				<img src="images/tasks/tic-tac-toe.jpeg" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+		<div class="box">
+			<a href="./games/Sudoku/sudoku.html" target="_blank">
+        <h2>Sudoku</h2>
+        <p>A puzzle game that requires logical thinking and problem-solving skills</p>
+				<img src="images/tasks/sudoku.jpeg" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="./games/chess/chess.html" target="_blank">
+        <h2>Chess</h2>
+        <p>Choose any background or color from the settings, undo option is also provided.</p>
+				<img src="images/tasks/chess.png" alt="chess" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+		<div class="box">
+			<a href="./games/menja/menja.html" target="_blank">
+        <h2>Menja</h2>
+        <p>players slice through flying fruits using a virtual knife or blade</p>
+				<img src="images/tasks/menja.png" alt="Menja" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+		<div class="box">
+			<a href="./games/planet-defense/planet.html" target="_blank">
+        <h2>Planet defense</h2>
+        <p>A JavaScript-based game where players defend their planet from incoming threats</p>
+				<img src="images/tasks/planet-defense.png" alt="Planet Defense" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="./games/stick-hero/index.html" target="_blank">
+        <h2>Stick Hero</h2>
+        <p>A game where players control a stick figure and navigate obstacles using a stick</p>
+				<img src="images/tasks/stickhero.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="./games/highway-race/index.html" target="_blank">
+        <h2>Highway Race</h2>
+        <p>An exciting racing game where players compete on a highway track</p>
+				<img src="./images/tasks/highwayrace.png" alt="highway-race" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>FlipCard Memory game</h2>
+        <p>A memory-testing game where players match pairs of flipped cards</p>
+				<img src="./images/tasks/Memory.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>Bullseye</h2>
+        <p>A game where players aim to hit the bullseye with their shots for points</p>
+				<img src="./images/tasks/bullseye.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>Spinner</h2>
+        <p>A customizable spinner that randomly selects one task or option from a given set</p>
+				<img src="./images/tasks/spinner.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>Plane attack</h2>
+        <p>Exciting aerial combat game with intense action sequences.</p>
+				<img src="./images/tasks/plane.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>Hit the green</h2>
+        <p>Golf-themed game where accuracy is key to success.</p>
+				<img src="./images/tasks/green.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>Maze runner</h2>
+        <p>Navigate through intricate mazes to reach the exit.</p>
+				<img src="./images/tasks/mazerunner.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>Zombie Ninja</h2>
+        <p>Slice and dice zombies as a skilled ninja warrior.</p>
+				<img src="./images/tasks/zombie.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>Coronavirus Invaders</h2>
+        <p>Defend the world from a viral outbreak with strategic moves.</p>
+				<img src="./images/tasks/c-invaders.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>Haunt Hunt</h2>
+        <p>TUncover mysteries in a spooky and suspenseful ghost hunt.</p>
+				<img src="./images/tasks/haunt.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>Ping-Pong</h2>
+        <p>Classic table tennis game with fast-paced back-and-forth action.</p>
+				<img src="./images/tasks/pingpong.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>Pop the Bubbles</h2>
+        <p>TBurst colorful bubbles in a satisfying bubble-popping experience.</p>
+				<img src="./images/tasks/pop.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>Rock-paper-scissors</h2>
+        <p>Traditional hand game of luck and strategy.</p>
+				<img src="./images/tasks/rps.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>What's the number</h2>
+        <p>Solve numeric puzzles to unlock hidden codes or answers.</p>
+				<img src="./images/tasks/guess.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>Connect 4</h2>
+        <p>trategic board game where you aim to align four tokens.</p>
+				<img src="./images/tasks/4-dot.png" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+    <div class="box">
+			<a href="" target="_blank">
+        <h2>Stack game</h2>
+        <p>Stack blocks or objects with precision and balance.</p>
+				<img src="./images/tasks/stack.jpeg" alt="Example website" style="width: 300px; height: 130px;">
+			</a>
+      <div class="lord-icons">
+        <button class="bookmark">
+        <lord-icon
+          src="https://cdn.lordicon.com/eanmttmw.json"
+          trigger="morph"
+          colors="primary:#ffffff"
+          state="morph-1"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      <button class="share" onclick="shareLink()">
+        <lord-icon
+          src="https://cdn.lordicon.com/wxhtpnnk.json"
+          trigger="hover"
+          colors="primary:#ffffff"
+          state="hover"
+          style="width:20px;height:20px"
+        ></lord-icon>
+      </button>
+      </div>
+		</div>
+  </div>
+<script src="main.js"></script>
+<script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+</body>
+</html>

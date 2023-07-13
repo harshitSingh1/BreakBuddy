@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe</title>
+  <link rel="icon" type="image/x-icon" href="../../images/favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <div class="board__settings">
+    <i class="fa fa-cog board__settings-cog"></i>
+    <h1 class="board__header-settings">Choose Player</h1>
+    <div class="board__row">
+      <div class="board__settings__choice-cross"></div>
+      <div class="board__settings__choice-nought"></div>
+    </div>
+  </div>
+  <div class="board__difficulty">
+    <i class="fa fa-cog board__settings-cog"></i>
+    <h1 class="board__header-difficulty">Select Difficulty</h1>
+    <div class="board__difficulty__button-easy" id="easy">Easy</div>
+    <div class="board__difficulty__button-medium" id="medium">Medium</div>
+    <div class="board__difficulty__button-hard" id="hard">Hard</div>
+  </div>
+  <div class="board">
+    <div class="board__row">
+      <input class="board__slot-hidden" type="radio" />
+      <label class="board__slot" id="0"></label>
+      <input class="board__slot-hidden" type="radio" />
+      <label class="board__slot" id="1"></label>
+      <input class="board__slot-hidden" type="radio" />
+      <label class="board__slot" id="2"></label>
+    </div>
+    <div class="board__row">
+      <input class="board__slot-hidden" type="radio" />
+      <label class="board__slot" id="3"></label>
+      <input class="board__slot-hidden" type="radio" />
+      <label class="board__slot" id="4"></label>
+      <input class="board__slot-hidden" type="radio" />
+      <label class="board__slot" id="5"></label>
+    </div>
+    <div class="board__row">
+      <input class="board__slot-hidden" type="radio" />
+      <label class="board__slot" id="6"></label>
+      <input class="board__slot-hidden" type="radio" />
+      <label class="board__slot" id="7"></label>
+      <input class="board__slot-hidden" type="radio" />
+      <label class="board__slot" id="8"></label>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chess</title>
+    <link href="style.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../images/favicon.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+    <div class="option-nav">
+        <div id="player-nav">
+            Player: <span id="player"></span>
+        </div>
+        <div id="option" class="btn">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+            <span class="tooltiptext">OPTION</span>
+        </div>
+        <div id="undo-btn" class="btn">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            <span class="tooltiptext">UNDO</span>
+        </div>
+    </div>
+    <div id="board">
+        <div id="result" class="hide"></div>
+        <div id="pawn-promotion-option" class="hide">
+            <span id="queen" class="option"></span>
+            <span id="rook" class="option"></span>
+            <span id="knight" class="option"></span>
+            <span id="bishop" class="option"></span>
+        </div>
+        <div id="option-menu" class="hide">
+            <div id="back-btn" class="button">BACK</div>
+            <div id="theme-menu">
+                THEME: <span id="theme-option" class="button"></span>
+            </div>
+            <div id="color-menu">
+                COLOR: <span id="color-option" class="button"></span>
+            </div>
+            <div id="restart-btn" class="button">NEW GAME</div>
+        </div>
+        <div id="game" ng-app="myApp" ng-controller="GameController">
+            <div class="row" ng-repeat="y in widths">
+                <div class="box" ng-repeat="x in widths" ng-attr-id="{{'box-' + x + '-' + y}}" piece=""></div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

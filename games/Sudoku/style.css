@@ -1,0 +1,213 @@
+body {
+  background-color: #000000;
+  color: #fff;
+}
+
+p {
+  margin: 0.5rem;
+  text-align: center;
+}
+
+p:first-child {
+  margin-top: 15px;
+}
+
+#resume {
+  display: none;
+}
+
+.time {
+  font-weight: 20px;
+  color: #fff;
+}
+
+.time .minutes,
+.time .seconds {
+  margin: 0 -2px;
+}
+
+.time .colon {
+  position: relative;
+  bottom: 1px;
+  margin: 0 -2px;
+}
+
+.adjust {
+  width: 400px;
+  margin: auto;
+  text-align: center;
+}
+
+.adjust .difficulty {
+  width: 150px;
+}
+
+.immutable {
+  font-weight: bold;
+}
+
+.numbers-bar {
+  width: 475px;
+  margin: 5px auto;
+  box-sizing: border-box;
+}
+
+.numbers-bar .number {
+  background-color: #ffddbb;
+  float: left;
+  border: 1px solid #640c01;
+  height: 50px;
+  width: 50px;
+  color: #000;
+  box-sizing: content-box;
+  font-size: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.numbers-bar .number:nth-child(3),
+.numbers-bar .number:nth-child(6) {
+  margin-right: 3px;
+}
+
+.numbers-bar .number:hover {
+  background-color: #fff4f4;
+}
+
+.sudoku {
+  width: 475px;
+  margin: auto;
+}
+
+.sudoku .square {
+  float: left;
+  border: 1px solid #000;
+}
+
+.sudoku .square .cell {
+  float: left;
+  position: relative;
+  height: 50px;
+  width: 50px;
+  background: #222;
+  border: 1px solid #ffffff;
+  box-sizing: content-box;
+}
+
+.sudoku .square .cell:hover {
+  background-color: #444;
+}
+
+.sudoku .square .cell:hover .label {
+  color: #fff;
+}
+
+.sudoku .square .cell.selected {
+  background-color: #888;
+}
+
+.sudoku .square .cell.selected .label {
+  color: #fff;
+}
+
+.sudoku .square .cell.error {
+  background-color: #E58080;
+}
+
+.sudoku .square .cell.valid {
+  background-color: #95E595;
+}
+
+.sudoku .square .cell .label {
+  position: absolute;
+  color: #ffffffa5;
+  top: 1px;
+  left: 2px;
+  font-size: 12px;
+}
+
+.sudoku .square .cell .value {
+  display: block;
+  font-size: 30px;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.sudoku .square .cell:nth-child(3n+1) {
+  clear: both;
+}
+
+
+/* Styling for all buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  border: 1px solid white;
+}
+
+/* Styling for the primary button */
+.btn-primary {
+  background-color: #007bff;
+}
+
+/* Styling for the info button */
+.btn-info {
+  background-color: #17a2b8;
+}
+
+/* Styling for the success button */
+.btn-success {
+  background-color: #28a745;
+}
+
+/* Styling for the danger button */
+.btn-danger {
+  background-color: #dc3545;
+}
+
+/* Styling for the default button */
+.btn-default {
+  background-color: #6c757d;
+}
+
+/* Styling for button hover effect */
+.btn:hover {
+  box-shadow: 0 0 10px rgb(208, 198, 251);
+}
+.resume-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+}
+#navbar {
+  background-color: #0f0d15;
+  color: #fff;
+  overflow: hidden;
+  position: fixed;
+  top: 10px;
+  left: 20px;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+#navbar img {
+  width: 180px;
+  height: 70px;
+  margin-right: 10px;
+}

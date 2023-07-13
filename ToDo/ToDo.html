@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <title>TODO | BreakBuddy</title>
+    <link rel="icon" type="image/x-icon" href="../images/favicon.png">
+</head>
+<body>
+    
+    <a href="../index.html" class="go-back-button"><i class="fas fa-arrow-left"></i> Go Back</a>
+    <div class="wrapper">
+        <section class="greeting">
+			<h2 class="title">
+				&ensp; Hello, <input type="text" id="name" placeholder="click here to add your name, ENTER to save"/>
+            </h2>
+		</section>
+        <section class="create-todo">
+			<h3><u style="font-family:times new roman;">Add your ToDo List</u></h3>
+			<form id="new-todo-form">
+				<h4>So... what needs to be done?</h4>
+				<input type="text" placeholder="e.g. Design UI/ Buy nailcutter etc..." name="content" id="content"/>   
+                
+                
+                <!-- <h4>date</h4>
+                <input type="text" placeholder="e.g. 12 january 2017 / 12/01/2017" name="date" id="date"/>                
+                   -->
+                   
+                <h4>Mark your task as urgent/casual!</h4>			
+                <div class="options">
+					<label>
+						<input type="radio" name="category" id="category1" value="Urgent" /> 
+						<span class="circle Urgent"></span>
+						<div>_URGENT_</div>
+					</label>
+					<label>
+						<input type="radio" name="category" id="category2" value="Casual" />
+						<span class="circle Casual"></span>
+						<div>_CASUAL_</div>
+					</label>
+				</div>
+                <div class="center">
+				<input type="submit" value="Click here to add Task" />
+                </div>
+			</form>
+        </section>
+
+
+        <section class="todo-list">
+            <h3 class="a" >My List of things to do ⬇️</h3>
+            <h3 class="a">You have <span class="pendingTasks"></span> pending tasks 👈</h3> 
+            <!-- <div class="list" id="todo-list"></div>  -->
+        </section>
+        <div class="footer">
+            <div class="list" id="todo-list"></div>
+          </div>
+</div>
+    <script src="main.js"></script>
+</body>
+</html>

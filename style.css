@@ -1,0 +1,887 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+  }
+  #navbar {
+    background-color: #0f0d15;
+    color: #fff;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    border: 2px solid rgb(250, 248, 248);
+     /* border-left: none; */
+     border-right: none;
+    align-items: center;
+    z-index: 3
+  }
+  #navbar img {
+    width: 150px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  #navbar .search-bar {
+    flex-grow: 1;
+    margin: 0 10px;
+  }
+  
+  #navbar .like-button {
+    margin-right: 10px;
+    background-color: #333;
+    cursor: pointer;
+  }
+  #navbar .like-button:hover{
+    margin-right: 10px;
+    box-shadow: 0px 0px 5px 1px white;
+  }
+  #navbar .profile-button {
+    margin-right: 20px;
+    background-color: #333;
+    cursor: pointer;
+  }
+  #navbar .profile-button:hover{
+    margin-right: 20px;
+    box-shadow: 0px 0px 5px 1px white;
+  }
+
+  .sidebar {
+    width: 210px;
+    background-color: #0f0d15;
+    padding: 15px;
+    position: fixed;
+    left: 0;
+    top: 72.5px;
+    bottom: 0;
+    border: 2px solid rgb(250, 248, 248);
+    transition: width 0.3s;
+    overflow: hidden;
+    overflow-y: auto;
+    z-index: 2;
+  }
+  
+  .sidebar::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  .sidebar::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  
+  .sidebar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  .collapse-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 31px;
+    font-size: 25px;
+    background-color: #f1f1f1;
+    border: none;
+    cursor: pointer;
+    padding-bottom: 4px;
+    transition: transform 0.3s;
+    display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+  
+  .sidebar-content {
+    padding-top: 10px;
+    color: wheat;
+  }
+  .sidebar-content span{
+    margin-left: 5px;
+  }
+  .sb {
+    /* padding-top: 10px; */
+    padding-right: 30px;
+    width: auto;
+    height: 30px;
+    border: 1px solid #ccc;
+    color: rgba(255, 255, 255, 0.549);
+    display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+  
+  .sidebar.collapsed {
+    width: 40px;
+  }
+  
+  .sidebar.collapsed .collapse-button {
+    right: 20px;
+    transform: rotate(-180deg);
+  }
+  
+  .sidebar.collapsed .shortcut-button span {
+    display: none;
+  }
+  .sidebar.collapsed .sidebar-content{
+    padding-top: 12px;
+  }
+  .sidebar.collapsed .sb {
+    border: 0px;
+  }
+  .sidebar.collapsed .sb span {
+    display: none;
+  }
+  
+  .sidebar .shortcut-button {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .sidebar .shortcut-button:hover {
+background-color: #333;
+  }
+  .sidebar.collapsed ~ .addsitebox {
+    margin-left: 70px;
+  }
+  
+  .sidebar.collapsed ~ .container {
+    margin-left: 70px;
+  }
+
+
+  /* search-bar */
+.search-container {
+  flex-grow: 1;
+    margin: 0 10px;
+	background-color: #f2f2f2;
+	/* padding: 2px;
+	margin-top: 0px; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  border-radius: 10px;
+  }
+  #search-form {
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+  }
+  .search-container form {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	max-width: 1200px;
+  }
+  
+  .search-container input[type="text"] {
+	flex: 1;
+	padding: 10px;
+	font-size: 1.2rem;
+	border: none;
+	width: 60%;
+	border-radius: 10px;
+  }
+  
+  .search-container button[type="submit"] {
+	background-color: #333;
+	color: #fff;
+	padding: 10px 10px;
+	border: none;
+	border-radius: 10px;
+	margin-left: 10px;
+	font-size: 1.2rem;
+	cursor: pointer;
+  }
+  
+  .search-container button[type="submit"]:hover {
+	background-color: #444;
+  }
+  .main-content {
+    margin-left: 220px;
+    padding: 20px;
+  }
+  
+  .main-content h1 {
+    margin-top: 0;
+  }
+  .container {
+    margin-left: 245px;
+    display: flex;
+    justify-content: space-around;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    transition: margin-left 0.3s ease;
+    /* margin-top: 20px; */
+    background: #000;
+    padding-top: 20px;
+  }
+  .box {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 300px;
+    background-color: #141417;
+	  padding: 20px;
+	  border-radius: 10px;
+	  box-shadow: 0 0 20px rgb(233, 229, 229);
+	  transition: all 0.3s ease;
+	  margin-bottom: 20px;
+    position: relative;
+	}
+  .box:hover {
+    border: 1px solid #ccc;
+    box-shadow: 0 0 20px rgb(208, 198, 251);
+  }
+.box p{
+  color: #b9bcced0;
+  /* font-size: 20px; */
+  text-align: center;
+  margin-top: 10px;
+}
+
+.box a {
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.box img {
+	max-width: 100%;
+	height: auto;
+	margin-bottom: 10px;
+  border-radius: 10px;
+}
+.lord-icons button{
+  background: #000;
+  cursor: pointer;
+}
+.lord-icons button:hover{
+  background-color: #141417;
+}
+.lord-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: -10px;
+}
+
+/* add-shortcut */
+
+.shortcut {
+  /* align-items: center;
+  justify-content: center; */
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #000000;
+  margin: 10px;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+.options-icon {
+  position: absolute;
+  top: 5px;
+  right: 1px;
+  padding: 5px;
+  cursor: pointer;
+  color: #fff;
+}
+#shortcutContainer {
+text-align: right;
+z-index: 0; /* Align shortcuts to the right */
+}
+
+/* #addShortcutBtn {
+float: left;
+margin-top: 10px;
+} */
+
+
+.shortcut img {
+  width: 24px;
+  height: 24px;
+}
+.site-icon-container {
+  background-color: rgb(255, 255, 255);
+  align-items: center;
+  justify-content: center;
+  display: inline-block;
+  padding: 4px;
+  width: 32px;
+  height: 32px;
+  box-sizing: border-box;
+}
+
+.shortcut .name {
+  color: #fff;
+  margin-top: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 5em;
+}
+
+.options {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 1;
+  top: calc(100% + 5px);
+  right: 0;
+}
+
+.shortcut:hover .options {
+  display: block;
+}
+
+.options button {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.modal {
+  display: none;
+position: fixed;
+z-index: 2;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+margin: 15% auto;
+padding: 20px;
+border: 1px solid #888;
+width: 300px;
+  
+}
+
+.modal-content input {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.modal-content button {
+  display: block;
+  margin-top: 10px;
+}
+
+.close {
+  color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+.close:hover,
+.close:focus {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+.addsitebox{
+  margin-left: 245px;
+    display: flex;
+    justify-content: center;
+    grid-gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 75px;
+    z-index: 1;
+  position: relative;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+    background: #000;
+}
+.btn-1 {
+  background: #0F0F6D;
+  border: 1px solid #ccc;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1.5em;
+  padding: 10px;
+  transition: all 0.5s;
+  border-radius: 10px;
+  width: auto;
+  position: relative;
+}
+.btn-1::after {
+  content: "+";
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 1000;
+  position: absolute;
+  left: 80%;
+  top: 20%;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+}
+.btn-1:hover {
+  background: #2b2bff;
+  transition: all 0.5s;
+  border-radius: 10px;
+  box-shadow: 0px 6px 15px #ccccf361;
+  padding: 10px 30px 10px 10px;
+}
+.btn-1:hover::after {
+  opacity: 1;
+  transition: all 0.5s;
+}
+
+/* tooltip code */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  max-width: 120px;
+  min-width: 70px;
+  background-color: rgba(255, 255, 255, 0.784);
+  color: #000000;
+  text-align: center;
+  border-radius: 6px;
+  padding: 1px 2px;
+  position: absolute;
+  z-index: 2;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+  font-size: 15px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent rgba(255, 255, 255, 0.703) transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+/* click here to send your idea */
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px; /* Adjusted width to match the box size */
+  height: 300px; /* Adjusted height to match the box size */
+  background-size: 300% 300%; /* Adjusted background size to match the box size */
+  backdrop-filter: blur(1rem);
+  border-radius: 10px; /* Adjusted border radius to match the box */
+  transition: 0.5s;
+  margin-bottom: 20px;
+  margin-left: 25px;
+  animation: gradient_301 5s ease infinite;
+  border: double 4px transparent;
+  background-image: linear-gradient(#212121, #212121),  linear-gradient(137.48deg, #ffdb3b 10%,#FE53BB 45%, #8F51EA 67%, #0044ff 87%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  cursor: pointer;
+}
+      
+      #container-stars {
+        position: fixed;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        transition: 0.5s;
+        backdrop-filter: blur(1rem);
+        border-radius: 1rem;
+      }
+      
+      strong {
+        z-index: 2;
+        font-family: 'Avalors Personal Use';
+        font-size: 40px;
+        letter-spacing: 5px;
+        color: #FFFFFF;
+        text-shadow: 0 0 4px white;
+      }
+      
+      #glow {
+        position: absolute;
+        display: flex;
+        width: 12rem;
+      }
+      
+      .circle {
+        width: 100%;
+        height: 30px;
+        filter: blur(2rem);
+        animation: pulse_3011 4s infinite;
+        z-index: -1;
+      }
+      
+      .circle:nth-of-type(1) {
+        background: rgba(254, 83, 186, 0.636);
+      }
+      
+      .circle:nth-of-type(2) {
+        background: rgba(142, 81, 234, 0.704);
+      }
+      
+      .btn:hover #container-stars {
+        z-index: 1;
+        background-color: #212121;
+      }
+      
+      .btn:hover {
+        transform: scale(1.1)
+      }
+      
+      .btn:active {
+        border: double 4px #FE53BB;
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+        animation: none;
+      }
+      
+      .btn:active .circle {
+        background: #FE53BB;
+      }
+      
+      #stars {
+        position: relative;
+        background: transparent;
+        width: 200rem;
+        height: 200rem;
+      }
+      
+      #stars::after {
+        content: "";
+        position: absolute;
+        top: -10rem;
+        left: -100rem;
+        width: 100%;
+        height: 100%;
+        animation: animStarRotate 90s linear infinite;
+      }
+      
+      #stars::after {
+        background-image: radial-gradient(#ffffff 1px, transparent 1%);
+        background-size: 50px 50px;
+      }
+      
+      #stars::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -50%;
+        width: 170%;
+        height: 500%;
+        animation: animStar 60s linear infinite;
+      }
+      
+      #stars::before {
+        background-image: radial-gradient(#ffffff 1px, transparent 1%);
+        background-size: 50px 50px;
+        opacity: 0.5;
+      }
+      
+      @keyframes animStar {
+        from {
+          transform: translateY(0);
+        }
+      
+        to {
+          transform: translateY(-135rem);
+        }
+      }
+      
+      @keyframes animStarRotate {
+        from {
+          transform: rotate(360deg);
+        }
+      
+        to {
+          transform: rotate(0);
+        }
+      }
+      
+      @keyframes gradient_301 {
+        0% {
+          background-position: 0% 50%;
+        }
+      
+        50% {
+          background-position: 100% 50%;
+        }
+      
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      
+      @keyframes pulse_3011 {
+        0% {
+          transform: scale(0.75);
+          box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+        }
+      
+        70% {
+          transform: scale(1);
+          box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+        }
+      
+        100% {
+          transform: scale(0.75);
+          box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        }
+      }
+      .tooltip1 {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  opacity: 0;
+  z-index: 4;
+  transition: opacity 0.3s ease;
+}
+
+.btn:hover .tooltip1 {
+  opacity: 1;
+}
+
+/* social media icons */
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+.wrapper {
+  display: inline-flex;
+  list-style: none;
+  justify-content: flex-start; /* Align icons to the left */
+  margin-left: -50px; /* Remove the default left margin */
+  margin-top: 0;
+}
+
+.wrapper .icon {
+  position: relative;
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 15px;
+  margin: 6px;
+  width: 15px;
+  height: 15px;
+  font-size: 25px;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 10px 10px rgba(184, 181, 181, 0.27);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip {
+      position: absolute;
+      bottom: -38px; /* Adjust this value as needed to control the distance between icon and tooltip */
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      background: #ffffff;
+      color: #ffffff;
+      
+      padding: 5px 8px;
+      border-radius: 5px;
+      box-shadow: 0 10px 10px rgba(212, 209, 209, 0.264);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .wrapper .tooltip::before {
+      position: absolute;
+      content: "";
+      height: 8px;
+      width: 8px;
+      background: #ffffff;
+      top: -4px; /* Adjust this value as needed to control the distance between tooltip and icon */
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .wrapper .icon:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper .LinkedIn:hover,
+.wrapper .LinkedIn:hover .tooltip,
+.wrapper .LinkedIn:hover .tooltip::before {
+  background: #1877F2;
+  color: #ffffff;
+}
+
+.wrapper .twitter:hover,
+.wrapper .twitter:hover .tooltip,
+.wrapper .twitter:hover .tooltip::before {
+  background: #1DA1F2;
+  color: #ffffff;
+}
+
+.wrapper .instagram:hover,
+.wrapper .instagram:hover .tooltip,
+.wrapper .instagram:hover .tooltip::before {
+  background: #E4405F;
+  color: #ffffff;
+}
+
+.wrapper .github:hover,
+.wrapper .github:hover .tooltip,
+.wrapper .github:hover .tooltip::before {
+  background: #333333;
+  color: #ffffff;
+}
+
+.rank-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  font-size: 14px;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.rank-progress h2 {
+  font-weight: bold;
+  color: #ffffff;
+  padding-top: -50px;
+  margin-bottom: -10px;
+}
+.rank-progress p{
+color: #FFFFFF;
+  margin-bottom: 5px;
+}
+
+.rank-progress .progress-bar {
+  width: 100px;
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.rank-progress .progress-bar .progress {
+  width: 0;
+  height: 100%;
+  background-color: #5453be;
+  transition: width 0.5s ease-in-out;
+}
+ /* weather in navbar */
+ .weath {
+  background-color: #33333300;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  margin: -15px;
+  cursor: pointer;
+}
+.weather-box {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+.weather-icon {
+  width: 30px;
+  height: 30px;
+  background-image: url(images/suncloud.svg); /* Replace with your weather icon */
+  background-size: cover;
+  background-position: center;
+}
+.weather-details {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.location {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+.dropdown-icon {
+  margin-left: 5px;
+}
+.temperature {
+  font-size: 16px;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 40px;
+  }
+  .addsitebox {
+    margin-left: 70px;
+  }
+
+  .container {
+    margin-left: 70px;
+  }
+  .sidebar.collapsed {
+    width: 40px;
+  }
+
+  .sidebar-toggle span {
+    margin: 0;
+  }
+  .sb {
+    border: 0px;
+  }
+  .rank-progress{
+    display: none;
+  }
+  .shortcut-button a,.sb span,
+  .shortcut-button span {
+    display: none;
+  }
+
+  .sidebar.collapsed .shortcut-button img {
+    margin: 0 auto;
+  }
+}
+
+.hidden {
+  display: none;
+}
