@@ -14,151 +14,194 @@ $(document).ready(function() {
     });
   });
   
-   // Shortcut data
-    var shortcuts = [];
-    
-    // Get the shortcut container element
-    var shortcutContainer = document.getElementById("shortcutContainer");
-    
-    // Render shortcuts
-    function renderShortcuts() {
-      // Clear existing shortcuts
-      shortcutContainer.innerHTML = "";
-      
-      // Loop through shortcuts and create elements
-      shortcuts.forEach(function(shortcut) {
-        var shortcutElement = document.createElement("div");
-        shortcutElement.className = "shortcut";
-        
-        // Create logo image
-        var logoImg = document.createElement("img");
-        logoImg.src = "https://www.google.com/s2/favicons?domain=" + shortcut.url;
-        
-        // Create site icon container
-        var siteIconContainer = document.createElement("div");
-        siteIconContainer.className = "site-icon-container";
-        siteIconContainer.appendChild(logoImg);
-        
-        // Append site icon container to shortcut element
-        shortcutElement.appendChild(siteIconContainer);
-        
-        // Create site name
-        var nameElement = document.createElement("div");
-        nameElement.className = "name";
-        var displayName = shortcut.name.length > 8 ? shortcut.name.slice(0, 8) + "..." : shortcut.name;
-        nameElement.textContent = displayName;
-        shortcutElement.appendChild(nameElement);
-        
-        // Add click event to open site
-        shortcutElement.addEventListener("click", function() {
-          window.open(shortcut.url, "_blank");
-        });
-        
-        // Create options
-        var optionsElement = document.createElement("div");
-        optionsElement.className = "options";
-        
-        // Create three-dot icon
-        var optionsIcon = document.createElement("i");
-        optionsIcon.className = "fas fa-ellipsis-v options-icon";
-        optionsIcon.addEventListener("click", function(event) {
-          event.stopPropagation();
-          optionsElement.style.display = "block";
-        });
-        shortcutElement.appendChild(optionsIcon);
-        
-        // Create rename button
-        var renameBtn = document.createElement("button");
-        renameBtn.textContent = "Rename";
-        renameBtn.addEventListener("click", function(event) {
-          event.stopPropagation();
-          var newName = prompt("Enter new name", shortcut.name);
-          if (newName) {
-            shortcut.name = newName;
-            renderShortcuts();
-            saveShortcuts();
-          }
-        });
-        optionsElement.appendChild(renameBtn);
-        
-        // Create delete button
-        var deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "Delete";
-        deleteBtn.addEventListener("click", function(event) {
-          event.stopPropagation();
-          var index = shortcuts.indexOf(shortcut);
-          if (index > -1) {
-            shortcuts.splice(index, 1);
-            renderShortcuts();
-            saveShortcuts();
-          }
-        });
-        optionsElement.appendChild(deleteBtn);
-        
-        // Add options to the shortcut element
-        shortcutElement.appendChild(optionsElement);
-        
-        // Add the shortcut element to the container
-        shortcutContainer.appendChild(shortcutElement);
-      });
-    }
-    
-    // Add shortcut button click event
-    var addShortcutBtn = document.getElementById("addShortcutBtn");
-    addShortcutBtn.addEventListener("click", function() {
-      document.getElementById("modal").style.display = "block";
-    });
-    
-    // Save shortcut button click event
-    var saveShortcutBtn = document.getElementById("saveShortcutBtn");
-    saveShortcutBtn.addEventListener("click", function() {
-      var nameInput = document.getElementById("nameInput");
-      var urlInput = document.getElementById("urlInput");
-      
-      var name = nameInput.value;
-      var url = urlInput.value;
-      
-      if (name && url) {
-        var shortcut = {
-          name: name,
-          url: url
-        };
-        
-        shortcuts.push(shortcut);
-        
-        renderShortcuts();
-        saveShortcuts();
-        
-        nameInput.value = "";
-        urlInput.value = "";
-        
-        document.getElementById("modal").style.display = "none";
-      }
-    });
-    
-    // Close modal button click event
-    var closeButton = document.getElementsByClassName("close")[0];
-    closeButton.addEventListener("click", function() {
-      document.getElementById("modal").style.display = "none";
-    });
-    
-    // Save shortcuts to local storage
-    function saveShortcuts() {
-      localStorage.setItem("shortcuts", JSON.stringify(shortcuts));
-    }
-    
-    // Load shortcuts from local storage
-    function loadShortcuts() {
-      var storedShortcuts = localStorage.getItem("shortcuts");
-      if (storedShortcuts) {
-        shortcuts = JSON.parse(storedShortcuts);
-        renderShortcuts();
-      }
-    }
-    
-    // Load shortcuts on page load
-    loadShortcuts();
+  var shortcuts = [];
 
+  // Get the shortcut container element
+  var shortcutContainer = document.getElementById("shortcutContainer");
+
+  // Render shortcuts
+  function renderShortcuts() {
+    // Clear existing shortcuts
+    shortcutContainer.innerHTML = "";
+
+    // Loop through shortcuts and create elements
+    shortcuts.forEach(function (shortcut) {
+      var shortcutElement = document.createElement("div");
+      shortcutElement.className = "shortcut";
+
+      // Create logo image
+      var logoImg = document.createElement("img");
+      logoImg.alt = shortcut.name;
+      logoImg.onerror = function() {
+        // Use the default favicon if logo retrieval fails
+        logoImg.src = shortcut.logo || ("https://www.google.com/s2/favicons?domain=" + shortcut.url);
+      };
+      
+      // Fetch the website and extract the logo
+      fetch(shortcut.url)
+        .then(response => response.text())
+        .then(data => {
+          var parser = new DOMParser();
+          var doc = parser.parseFromString(data, "text/html");
+          var logoElement = doc.querySelector("link[rel='shortcut icon'], link[rel='icon']");
+          if (logoElement) {
+            var logoUrl = new URL(logoElement.href, shortcut.url);
+            logoImg.src = logoUrl.href;
+          } else {
+            // Use the default favicon if no logo found
+            logoImg.src = "https://www.google.com/s2/favicons?domain=" + shortcut.url;
+          }
+        })
+        .catch(error => {
+          console.error("Logo fetch error:", error);
+          // Use the default favicon on fetch error
+          logoImg.src = "https://www.google.com/s2/favicons?domain=" + shortcut.url;
+        });
+
+      // Create site icon container
+      var siteIconContainer = document.createElement("div");
+      siteIconContainer.className = "site-icon-container";
+      siteIconContainer.appendChild(logoImg);
+
+      // Append site icon container to shortcut element
+      shortcutElement.appendChild(siteIconContainer);
+
+      // Create site name
+      var nameElement = document.createElement("div");
+      nameElement.className = "name";
+      var displayName = shortcut.name.length > 8 ? shortcut.name.slice(0, 8) + "..." : shortcut.name;
+      nameElement.textContent = displayName;
+      shortcutElement.appendChild(nameElement);
+
+      // Add click event to open site
+      shortcutElement.addEventListener("click", function () {
+        window.open(shortcut.url, "_blank");
+      });
+
+      // Create options
+      var optionsElement = document.createElement("div");
+      optionsElement.className = "options";
+
+      // Create three-dot icon
+      var optionsIcon = document.createElement("i");
+      optionsIcon.className = "fas fa-ellipsis-v options-icon";
+      optionsIcon.addEventListener("click", function (event) {
+        event.stopPropagation();
+        optionsElement.style.display = "block";
+      });
+      shortcutElement.appendChild(optionsIcon);
+
+      // Create rename button
+      var renameBtn = document.createElement("button");
+      renameBtn.textContent = "Rename";
+      renameBtn.addEventListener("click", function (event) {
+        event.stopPropagation();
+        var newName = prompt("Enter new name", shortcut.name);
+        if (newName) {
+          shortcut.name = newName;
+          renderShortcuts();
+          saveShortcuts();
+        }
+      });
+      optionsElement.appendChild(renameBtn);
+
+      // Create delete button
+      var deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.addEventListener("click", function (event) {
+        event.stopPropagation();
+        var index = shortcuts.indexOf(shortcut);
+        if (index > -1) {
+          shortcuts.splice(index, 1);
+          renderShortcuts();
+          saveShortcuts();
+        }
+      });
+      optionsElement.appendChild(deleteBtn);
+
+      // Add options to the shortcut element
+      shortcutElement.appendChild(optionsElement);
+
+      // Add the shortcut element to the container
+      shortcutContainer.appendChild(shortcutElement);
+    });
+  }
+
+  // Add shortcut button click event
+  var addShortcutBtn = document.getElementById("addShortcutBtn");
+  addShortcutBtn.addEventListener("click", function () {
+    document.getElementById("modal").style.display = "block";
+  });
+
+  // Save shortcut button click event
+  var saveShortcutBtn = document.getElementById("saveShortcutBtn");
+  saveShortcutBtn.addEventListener("click", function () {
+    var nameInput = document.getElementById("nameInput");
+    var urlInput = document.getElementById("urlInput");
+
+    var name = nameInput.value;
+    var url = urlInput.value;
+
+    if (name && url) {
+      var shortcut = {
+        name: name,
+        url: url
+      };
+
+      shortcuts.push(shortcut);
+
+      renderShortcuts();
+      saveShortcuts();
+
+      nameInput.value = "";
+      urlInput.value = "";
+
+      document.getElementById("modal").style.display = "none";
+    }
+  });
+
+  // Close modal button click event
+  var closeButton = document.getElementsByClassName("close")[0];
+  closeButton.addEventListener("click", function () {
+    document.getElementById("modal").style.display = "none";
+  });
+
+  // Save shortcuts to local storage
+  function saveShortcuts() {
+    localStorage.setItem("shortcuts", JSON.stringify(shortcuts));
+  }
+
+  // Load shortcuts from local storage
+  function loadShortcuts() {
+    var storedShortcuts = localStorage.getItem("shortcuts");
+    if (storedShortcuts) {
+      shortcuts = JSON.parse(storedShortcuts);
+      renderShortcuts();
+    }
+  }
+
+  // Load shortcuts on page load
+  loadShortcuts();
+
+  // Add the new shortcut
+  var newShortcut = {
+    name: "SmartWeb",
+    url: "https://harshitsingh1.github.io/SmartWeb/",
+    logo: "https://harshitsingh1.github.io/SmartWeb/img/logo.png"
+  };
+
+  shortcuts.push(newShortcut);
+
+      var newShortcut2 = {
+        name: "Outlook",
+        url: "https://outlook.office.com/mail/inbox",
+      };
+
+      shortcuts.push(newShortcut2);
+      renderShortcuts();
+
+
+//collapse sidebar
 const collapseButton = document.querySelector('.collapse-button');
 const sidebar = document.querySelector('.sidebar');
 collapseButton.addEventListener('click', function() {
