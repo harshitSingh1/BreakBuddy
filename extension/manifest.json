@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "BreakBuddy",
+  "description": "Experience a productive break with our extension, transforming your Chrome home page into a captivating hub. Discover technical blogs, facts, jokes, quizzes, games like Tik-Tac-Toe and Sudoku, and more. Take a refreshing break from work and enjoy a moment of entertainment and exploration.",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "./index.html"
+  },
+  "action": {
+    "default_icon": {
+      "16": "./favicon16.png",
+      "48": "./favicon48.png",
+      "128": "./favicon128.png"
+    }
+  }
+}
