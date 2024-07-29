@@ -1,5 +1,6 @@
 # BreakBuddy
 website link1 : https://harshitsingh1.github.io/BreakBuddy/
+
 website link2 : https://main.d2onf8i510ljit.amplifyapp.com/
 
 ## Introduction
@@ -41,6 +42,7 @@ To install and use BreakBuddy:
    - Go to `chrome://extensions/`
    - Enable "Developer mode"
    - Click on "Load unpacked" and select the project directory
+   - upload "extension" folder.
 
 ## Usage
 
