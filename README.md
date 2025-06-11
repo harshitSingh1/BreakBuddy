@@ -5,6 +5,9 @@ website link2 : https://main.d2onf8i510ljit.amplifyapp.com/
 
 Blog link: https://link.medium.com/jgQQiZcUDLb
 
+![BreakBuddy](https://github.com/user-attachments/assets/27625516-1aca-4bc6-8726-bb30da014a7f)
+
+
 ## Introduction
 
 "BreakBuddy" is a Chrome extension designed to prevent employees from wasting time on their phones or laptops. The extension changes the home page to a website where employees can take productive breaks by engaging in activities like reading technical blogs, playing games, and using tools such as a customizable spinner, reminder, chat with AI, and a to-do list. This ensures that breaks are not only relaxing but also productive and beneficial.
